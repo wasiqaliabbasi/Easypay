@@ -1,9 +1,10 @@
-﻿using System;
+﻿using EasypayPaymentSolution.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.AspNet.Identity;
 namespace EasypayPaymentSolution.Controllers
 {
 
@@ -12,8 +13,10 @@ namespace EasypayPaymentSolution.Controllers
         [Authorize]
         public ActionResult Index()
         {
-
-            return View();
+            EasypayDBContext eDBContext = new EasypayDBContext();
+            string uName = User.Identity.GetUserName().ToString();
+            List<BankDetails> bDetails = eDBContext.bnkDetails.Where(f => f.Email == uName).ToList();
+            return View(bDetails.FirstOrDefault());
         }
 
         public ActionResult About()
