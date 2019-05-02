@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace EasypayPaymentSolution.Controllers
 {
+    [Authorize]
     public class BankDetailsController : Controller
     {
         // GET: BankDetails
@@ -39,7 +40,7 @@ namespace EasypayPaymentSolution.Controllers
             eDBContext.bnkDetails.Add(bd);
             eDBContext.SaveChanges();
 
-            return Content("Done");
+            return RedirectToAction("Index");
         }
     }
 }

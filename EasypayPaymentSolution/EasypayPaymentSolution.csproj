@@ -177,16 +177,9 @@
     <Compile Include="Controllers\BankDetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904301016051_InitialCreate.cs" />
-    <Compile Include="Migrations\201904301016051_InitialCreate.Designer.cs">
-      <DependentUpon>201904301016051_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904302111297_NewMigration.cs" />
-    <Compile Include="Migrations\201904302111297_NewMigration.Designer.cs">
-      <DependentUpon>201904302111297_NewMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -257,6 +250,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\BankDetails\Details.cshtml" />
     <Content Include="Views\BankDetails\Index.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Transaction\Transfer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -273,14 +268,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904301016051_InitialCreate.resx">
-      <DependentUpon>201904301016051_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904302111297_NewMigration.resx">
-      <DependentUpon>201904302111297_NewMigration.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

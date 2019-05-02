@@ -9,8 +9,7 @@ namespace EasypayPaymentSolution.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "EasypayPaymentSolution.Models.EasypayDBContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(EasypayPaymentSolution.Models.EasypayDBContext context)

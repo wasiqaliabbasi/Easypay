@@ -3,13 +3,12 @@
 @{
     ViewBag.Title = "Index";
 }
+<h2>Bank Details need to be added</h2>
 
-<h2>Index</h2>
-
-@using (Html.BeginForm("Create", "BankDetails")) 
+@using (Html.BeginForm("Create", "BankDetails"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>BankDetails</h4>
         <hr />
