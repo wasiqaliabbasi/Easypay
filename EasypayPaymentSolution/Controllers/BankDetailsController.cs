@@ -33,8 +33,6 @@ namespace EasypayPaymentSolution.Controllers
             BankDetails bd = new BankDetails();
             bd.AccNo = Request.Form["AccNo"];
             bd.Email = Request.Form["Email"];
-            if (bd.Email == User.Identity.GetUserName())
-            {
                 bd.FirstName = Request.Form["FirstName"];
                 bd.LastName = Request.Form["LastName"];
                 bd.RoutingNo = Request.Form["RoutingNo"];
@@ -43,8 +41,8 @@ namespace EasypayPaymentSolution.Controllers
                 eDBContext.SaveChanges();
 
                 return RedirectToAction("Index");
-            }
-            else ModelState.AddModelError("Email", "Email address should be the same as User ID");
+
+
             return RedirectToAction("Index");
         }
     }
