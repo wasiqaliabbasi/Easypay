@@ -21,7 +21,12 @@ namespace EasypayPaymentSolution.Controllers
              List<BankDetails> bDetails= eDBContext.bnkDetails.Where(f => f.Email == uName).ToList();
             if (bDetails.Count != 0)
                 return RedirectToAction("Details", "BankDetails");
-            else return View();
+            else
+            {
+                BankDetails bd = new BankDetails();
+                bd.Email = uName;
+                return View(bd);
+            }
         }
         public ActionResult Details()
         {
@@ -33,15 +38,21 @@ namespace EasypayPaymentSolution.Controllers
         {
             BankDetails bd = new BankDetails();
             bd.AccNo = Request.Form["AccNo"];
-            bd.Email = Request.Form["Email"];
-                bd.FirstName = Request.Form["FirstName"];
+            bd.Email = User.Identity.GetUserName().ToString();
+            bd.FirstName = Request.Form["FirstName"];
                 bd.LastName = Request.Form["LastName"];
                 bd.RoutingNo = Request.Form["RoutingNo"];
                 bd.Balance = 1000;
                 eDBContext.bnkDetails.Add(bd);
                 eDBContext.SaveChanges();
-
                 return RedirectToAction("Index");
+
+
+
+
+//else ViewBag.CustomError = "ERROR IS HERE";
+
+            return View();
         }
         public ActionResult Edit()
         {

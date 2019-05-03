@@ -255,6 +255,7 @@
     <Content Include="Views\Transaction\ViewTransactions.cshtml" />
     <Content Include="Views\BankDetails\Edit.cshtml" />
     <Content Include="Views\BankDetails\EditForm.cshtml" />
+    <Content Include="Views\BankDetails\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

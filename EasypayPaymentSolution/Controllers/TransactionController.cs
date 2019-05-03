@@ -21,24 +21,39 @@ namespace EasypayPaymentSolution.Controllers
         {
             Transaction trnsction = new Transaction();
             trnsction.ReceiverEmail = Request.Form["ReceiverEmail"];
-            Double amount = Convert.ToDouble(Request.Form["Amount"]);
+            Double amount=0.0;
+            try {
+                amount = Convert.ToDouble(Request.Form["Amount"]);
+                if (amount < 0) throw new Exception();
+            }
+            catch(Exception e)
+            {
+                ViewBag.Message = "Invalid Amount Entered";
+                return View();
+            }
             trnsction.Amount = amount;
             trnsction.SenderEmail = User.Identity.GetUserName().ToString();
             trnsction.tTime = DateTime.Now;
             eDBContext.trnsction.Add(trnsction);
 
+            string receiverUName = Request.Form["ReceiverEmail"];
+            BankDetails receiverDetails = eDBContext.bnkDetails.Where(f => f.Email == receiverUName).FirstOrDefault();
+
+            if (receiverDetails == null)
+            {
+                ViewBag.Message = "Receiver doesn't exist!!";
+                return View();
+            }
 
             string senderUName = User.Identity.GetUserName().ToString();
             BankDetails sndrDetails = eDBContext.bnkDetails.Where(f => f.Email == senderUName).ToList().FirstOrDefault();
 
             sndrDetails.Balance = sndrDetails.Balance - (float)amount;
 
-            string receiverUName = Request.Form["ReceiverEmail"];
-            BankDetails receiverDetails = eDBContext.bnkDetails.Where(f => f.Email == receiverUName).FirstOrDefault();
-
             receiverDetails.Balance = receiverDetails.Balance + (float)amount;
 
             eDBContext.SaveChanges();
+            ViewBag.Message = "Transaction Successful";
             return View();
         }
         public ActionResult ViewTransactions()
