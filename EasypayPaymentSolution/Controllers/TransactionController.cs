@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 namespace EasypayPaymentSolution.Controllers
 {
     [Authorize]
+    [HandleError]
     public class TransactionController : Controller
     {
         EasypayDBContext eDBContext = new EasypayDBContext();
@@ -39,6 +40,12 @@ namespace EasypayPaymentSolution.Controllers
 
             eDBContext.SaveChanges();
             return View();
+        }
+        public ActionResult ViewTransactions()
+        {
+            string UName = User.Identity.GetUserName().ToString();
+            List<Transaction> transactions= eDBContext.trnsction.Where(f => f.SenderEmail == UName || f.ReceiverEmail == UName).ToList();
+            return View(transactions);
         }
     }
 }

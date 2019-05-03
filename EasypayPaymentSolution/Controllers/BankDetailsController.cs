@@ -9,6 +9,7 @@ using System.Web.Mvc;
 namespace EasypayPaymentSolution.Controllers
 {
     [Authorize]
+    [HandleError]
     public class BankDetailsController : Controller
     {
         // GET: BankDetails
@@ -41,9 +42,31 @@ namespace EasypayPaymentSolution.Controllers
                 eDBContext.SaveChanges();
 
                 return RedirectToAction("Index");
+        }
+        public ActionResult Edit()
+        {
+            return View();
+        }
+        public ActionResult EditForm()
+        {
+            string UName = User.Identity.GetUserName().ToString();
+            BankDetails bd = eDBContext.bnkDetails.Where(f => f.Email == UName).ToList().FirstOrDefault();
+            bd.AccNo= Request.Form["AccNo"];
+            bd.AccNo = Request.Form["AccNo"];
+            bd.Email = Request.Form["Email"];
+            bd.FirstName = Request.Form["FirstName"];
+            bd.LastName = Request.Form["LastName"];
+            bd.RoutingNo = Request.Form["RoutingNo"];
 
+            eDBContext.bnkDetails.Add(bd);
+            eDBContext.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+        public ActionResult kkk()
+        {
+            ViewBag.CustomError = "This is custom";
+            return View();
         }
     }
 }
