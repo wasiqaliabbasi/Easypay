@@ -10,7 +10,14 @@
 </div>
 
 <div class="top-right">
-    <h3>Balance: </h3> <h4>$@Html.DisplayFor(model => model.Balance)</h4>
-    
 
+    @if (Model.Balance != 0)
+    {
+        <h3>Balance: </h3>
+        <h4>$@Html.DisplayFor(model => model.Balance)</h4>
+    }
+    @if (Model.Balance == 0)
+    {
+        <h4>@Html.DisplayFor(model => model.Email)</h4>
+    }
 </div>

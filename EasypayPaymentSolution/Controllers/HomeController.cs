@@ -15,8 +15,13 @@ namespace EasypayPaymentSolution.Controllers
         {
             EasypayDBContext eDBContext = new EasypayDBContext();
             string uName = User.Identity.GetUserName().ToString();
-            List<BankDetails> bDetails = eDBContext.bnkDetails.Where(f => f.Email == uName).ToList();
-            return View(bDetails.FirstOrDefault());
+            BankDetails bDetails = eDBContext.bnkDetails.Where(f => f.Email == uName).ToList().FirstOrDefault();
+            if(bDetails==null)
+            {
+                bDetails = new BankDetails();
+                bDetails.Email = "Bank Details need to be configured before proceeding";
+            }
+            return View(bDetails);
         }
 
         public ActionResult About()
